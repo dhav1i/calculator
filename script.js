@@ -150,7 +150,7 @@ clearBtn.addEventListener('click', () => {
 
 
 deleteBtn.addEventListener('click', () => {
-    if(!operator && firstInt){
+    if(!operator && firstInt.length >= 1){
         firstInt = firstInt.slice(0,[firstInt.length -1])
         valueInput.value = firstInt
     } else {
