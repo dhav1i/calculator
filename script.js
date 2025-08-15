@@ -10,6 +10,7 @@ const operationInput = document.querySelector('#operation');
 const digitBtns = document.querySelectorAll('.digit')
 const dotBtn = document.querySelector('.dot-operator')
 
+let calculationDone = false;
 let result;
 let operator = "";
 let firstInt = "";
@@ -69,7 +70,8 @@ function operate(num1,op,num2) {
 
 digitBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        if(operator === "" && firstInt == result) {
+        if(operator === "" && calculationDone) {
+            calculationDone = false;
             firstInt = ""
             firstInt += btn.textContent
             valueInput.value = firstInt
@@ -134,6 +136,7 @@ equalBtn.addEventListener('click', () => {
     valueInput.value = "";
     secondInt = "";
     operator = "";
+    calculationDone = true;
     }
 });
 
@@ -157,11 +160,17 @@ deleteBtn.addEventListener('click', () => {
 })
 
 dotBtn.addEventListener('click', () => {
+    if(calculationDone) {
+        firstInt = ""
+        calculationDone = false;
+    }
     if(operator === "" && !firstInt.includes(".")) {
-        firstInt += "."
+        if (firstInt === "") firstInt = "0"; 
+        firstInt += ".";
         valueInput.value = firstInt;
     } else if(operator !== "" && !secondInt.includes(".")) {
-        secondInt += "."
+        if (secondInt === "") secondInt = "0";
+        secondInt += ".";
         valueInput.value = secondInt;
     }
 })
