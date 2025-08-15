@@ -51,6 +51,9 @@ function operate(num1,op,num2) {
             firstInt = ""
             return;
         }
+        if(result % 1 !== 0) {
+           result = result.toFixed(2)
+        }
         return firstInt = result;
     } 
 }
@@ -136,7 +139,7 @@ clearBtn.addEventListener('click', () => {
 
 
 deleteBtn.addEventListener('click', () => {
-    if(!operator){
+    if(!operator && firstInt){
         firstInt = firstInt.slice(0,[firstInt.length -1])
         valueInput.value = firstInt
     } else {
