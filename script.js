@@ -69,11 +69,6 @@ function operate(num1,op,num2) {
 
 digitBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        if(valueInput.value.includes(".")) {
-            dotBtn.disabled = true;
-        } else {
-            dotBtn.disabled = false;
-        }
         if(operator === "" && firstInt == result) {
             firstInt = ""
             firstInt += btn.textContent
@@ -90,7 +85,6 @@ digitBtns.forEach((btn) => {
         }
     })
 });
-
 
 
 plusBtn.addEventListener('click', () => {
@@ -161,3 +155,15 @@ deleteBtn.addEventListener('click', () => {
         valueInput.value = secondInt
     }
 })
+
+dotBtn.addEventListener('click', () => {
+    if(operator === "" && !firstInt.includes(".")) {
+        firstInt += "."
+        valueInput.value = firstInt;
+    } else if(operator !== "" && !secondInt.includes(".")) {
+        secondInt += "."
+        valueInput.value = secondInt;
+    }
+})
+
+
