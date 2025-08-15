@@ -37,19 +37,28 @@ function multiply(a,b) {
 function operate(num1,op,num2) {
     if(op == "+") {
         result = add(num1,num2);
+        if(result % 1 !== 0) {
+           result = result.toFixed(2)
+        }
       return firstInt = result;
     } else if(op == "-") {
         result = subtract(num1,num2);
+        if(result % 1 !== 0) {
+           result = result.toFixed(2)
+        }
         return firstInt = result;
     } else if(op == "*") {
         result = multiply(num1,num2);
+        if(result % 1 !== 0) {
+           result = result.toFixed(2)
+        }
         return firstInt = result;
     } else if(op == "/") {
         result = divide(num1,num2)
         if(result === "Cannot divide by 0") {
-            operationInput.placeholder = result;
-            firstInt = ""
-            return;
+           operationInput.placeholder = result;
+           firstInt = ""
+           return;
         }
         if(result % 1 !== 0) {
            result = result.toFixed(2)
