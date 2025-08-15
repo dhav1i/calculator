@@ -10,46 +10,54 @@ const operationInput = document.querySelector('#operation');
 const digitBtns = document.querySelectorAll('.digit')
 const dotBtn = document.querySelector('.dot-operator')
 
-let sum = 0;
+let result;
 let operator = "";
 let firstInt = "";
 let secondInt = "";
 
-function add(num1,num2) {
-    sum = Number(num1) + Number(num2);
-    return sum
+function add(a,b) {
+    return Number(a) + Number(b);
 }
 
-function subtract(num1,num2) {
-    sum = Number(num1) - Number(num2);
-    return sum
+function subtract(a,b) {
+    return Number(a) - Number(b);
 }
 
-function divide(num1,num2) {
-    sum = Number(num1) / Number(num2);
-    return sum
+function divide(a,b) {
+    if(Number(b) === 0) {
+        return "Cannot divide by 0" 
+    } 
+    return Number(a) / Number(b);
 }
 
-function multiply(num1,num2) {
-    sum = Number(num1) * Number(num2);
-    return sum
+function multiply(a,b) {
+    return Number(a) * Number(b);
 }
 
 function operate(num1,op,num2) {
     if(op == "+") {
-      return firstInt = add(num1,num2)
+        result = add(num1,num2);
+      return firstInt = result;
     } else if(op == "-") {
-        return firstInt = subtract(num1,num2)
+        result = subtract(num1,num2);
+        return firstInt = result;
     } else if(op == "*") {
-        return firstInt = multiply(num1,num2)
+        result = multiply(num1,num2);
+        return firstInt = result;
     } else if(op == "/") {
-        return firstInt = divide(num1,num2)
+        result = divide(num1,num2)
+        if(result === "Cannot divide by 0") {
+            operationInput.placeholder = result;
+            firstInt = ""
+            return;
+        }
+        return firstInt = result;
     } 
 }
 
 digitBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        if(operator === "" && firstInt == sum) {
+        if(operator === "" && firstInt == result) {
             firstInt = ""
             firstInt += btn.textContent
             valueInput.value = firstInt
@@ -70,7 +78,7 @@ digitBtns.forEach((btn) => {
 
 
 plusBtn.addEventListener('click', () => {
-    if(!firstInt == "") {
+    if(firstInt !== "") {
         operator = "+"
         operator == "+" && !secondInt == "" ? operate(firstInt, operator, secondInt) : false;
         operationInput.value = `${firstInt} ${operator}`
@@ -80,7 +88,7 @@ plusBtn.addEventListener('click', () => {
 });
 
 minusBtn.addEventListener('click', () => {
-    if(!firstInt == "") {
+    if(firstInt !== "") {
     operator = "-"
     operator == "-" && !secondInt == "" ? operate(firstInt, operator, secondInt) : false;
     operationInput.value = `${firstInt} ${operator}`
@@ -90,7 +98,7 @@ minusBtn.addEventListener('click', () => {
 });
 
 mutliplyBtn.addEventListener('click', () => {
-    if(!firstInt == "") {
+    if(firstInt !== "") {
     operator = "*"
     operator == "*" && !secondInt == "" ? operate(firstInt, operator, secondInt) : false;
     operationInput.value = `${firstInt} ${operator}`
@@ -100,7 +108,7 @@ mutliplyBtn.addEventListener('click', () => {
 });
 
 divideBtn.addEventListener('click', () => {
-    if(!firstInt == "") {
+    if(firstInt !== "") {
     operator = "/"
     operator == "/" && !secondInt == "" ? operate(firstInt, operator, secondInt) : false;
     operationInput.value = `${firstInt} ${operator}`
@@ -110,9 +118,9 @@ divideBtn.addEventListener('click', () => {
 });
 
 equalBtn.addEventListener('click', () => {
-    if(!firstInt == "" && !secondInt == "") {
+    if(firstInt !== "" && secondInt !== "") {
     operate(firstInt, operator, secondInt);
-    operationInput.value = `${sum}`;
+    operationInput.value = `${firstInt}`;
     valueInput.value = "";
     secondInt = "";
     operator = "";
@@ -123,11 +131,8 @@ clearBtn.addEventListener('click', () => {
     operator = "";
     firstInt = "";
     secondInt = "";
-    sum = 0;
     valueInput.value = ""
     operationInput.value = `0`
 })
 
 
-let num = 1.5 % 1
-console.log(num)
