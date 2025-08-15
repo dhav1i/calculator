@@ -67,7 +67,6 @@ digitBtns.forEach((btn) => {
             secondInt += btn.textContent
             valueInput.value = secondInt
             operationInput.value = `${firstInt} ${operator}`
-            console.log(secondInt)
         } else if(operator == "") { 
             firstInt += btn.textContent
             valueInput.value = firstInt
@@ -136,3 +135,12 @@ clearBtn.addEventListener('click', () => {
 })
 
 
+deleteBtn.addEventListener('click', () => {
+    if(!operator){
+        firstInt = firstInt.slice(0,[firstInt.length -1]) + firstInt.slice([firstInt.length -1] + 1)
+        valueInput.value = firstInt
+    } else {
+        secondInt = secondInt.slice(0,[secondInt.length -1]) + secondInt.slice([secondInt.length -1] + 1)
+        valueInput.value = secondInt
+    }
+})
