@@ -60,6 +60,11 @@ function operate(num1,op,num2) {
 
 digitBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
+        if(valueInput.value.includes(".")) {
+            dotBtn.disabled = true;
+        } else {
+            dotBtn.disabled = false;
+        }
         if(operator === "" && firstInt == result) {
             firstInt = ""
             firstInt += btn.textContent
